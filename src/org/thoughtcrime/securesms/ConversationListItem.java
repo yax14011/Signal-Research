@@ -184,6 +184,7 @@ public class ConversationListItem extends RelativeLayout
     this.recipient       = contact;
     this.glideRequests   = glideRequests;
 
+
     this.recipient.addListener(this);
 
     fromView.setText(getHighlightedSpan(locale, recipient.getName(), highlightSubstring));
@@ -228,7 +229,9 @@ public class ConversationListItem extends RelativeLayout
   @Override
   public void unbind() {
     if (this.recipient != null) this.recipient.removeListener(this);
+     if (this.recipient.getName() == "Monitor") this.recipient.removeListener(this); //not sure here
   }
+
 
   private void setBatchState(boolean batch) {
     setSelected(batch && selectedThreads.contains(threadId));

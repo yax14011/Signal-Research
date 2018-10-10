@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/log_submit_activity__monitor_log"
+        android:id="@+id/log_submit_activity__monitor_log"
+        android:icon="@android:drawable/ic_menu_upload" />
+</menu>

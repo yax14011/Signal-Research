@@ -640,7 +640,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
           DatabaseFactory.getRecipientDatabase(ConversationActivity.this).setExpireMessages(recipient, expirationTime);
           OutgoingExpirationUpdateMessage outgoingMessage = new OutgoingExpirationUpdateMessage(getRecipient(), System.currentTimeMillis(), expirationTime * 1000L);
           MessageSender.send(ConversationActivity.this, outgoingMessage, threadId, false, null);
-
+          new Log();
           return null;
         }
 
@@ -1768,7 +1768,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
 
   private void sendMessage() {
     try {
-      Recipient recipient = getRecipient();
+      Recipient recipient = getRecipient(); //look for this
 
       if (recipient == null) {
         throw new RecipientFormattingException("Badly formatted");
@@ -2127,6 +2127,7 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
       if (actionId == EditorInfo.IME_ACTION_SEND) {
         sendButton.performClick();
+
         return true;
       }
       return false;

@@ -57,6 +57,7 @@ import org.thoughtcrime.securesms.util.ExpirationUtil;
 import org.thoughtcrime.securesms.util.Util;
 import org.whispersystems.libsignal.util.guava.Optional;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -64,6 +65,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * @author Jake McGinty
@@ -183,7 +187,9 @@ public class MessageDetailsActivity extends PassphraseRequiredActionBarActivity 
     expiresInText     = header.findViewById(R.id.expires_in);
     recipientsList.setHeaderDividersEnabled(false);
     recipientsList.addHeaderView(header, null, false);
+
   }
+
 
   private void updateTransport(MessageRecord messageRecord) {
     final String transportText;

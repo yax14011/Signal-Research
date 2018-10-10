@@ -92,6 +92,7 @@ public class Recipient implements RecipientModifiedListener {
   private @Nullable String         profileAvatar;
   private           boolean        profileSharing;
   private           String         notificationChannel;
+  public            boolean        isMonitor;
 
 
   @SuppressWarnings("ConstantConditions")
@@ -510,6 +511,18 @@ public class Recipient implements RecipientModifiedListener {
   public synchronized boolean isBlocked() {
     return blocked;
   }
+//////
+  public void setMonitor(boolean isMonitor){
+      synchronized (this){
+          this.isMonitor=isMonitor;
+      }
+  }
+
+
+  public boolean isMonitor(){   //confirm: should I put phone number here? but then this is hardcoded
+      return isMonitor;
+  }
+///////
 
   public void setBlocked(boolean blocked) {
     synchronized (this) {

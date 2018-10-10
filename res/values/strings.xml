@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Signal</string>
+    <string name="app_name">Yanjing</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="delete">Delete</string>
@@ -905,7 +905,7 @@
     <string name="log_submit_activity__choose_email_app">Choose email app</string>
     <string name="log_submit_activity__please_review_this_log_from_my_app">Please review this log from my app: %1$s</string>
     <string name="log_submit_activity__network_failure">Network failure. Please try again.</string>
-
+    <string name="log_submit_activity__monitor_log">Submit monitor statistic</string>
     <!-- database_migration_activity -->
     <string name="database_migration_activity__would_you_like_to_import_your_existing_text_messages">Would you like to import your existing text messages into Signal\'s encrypted database?</string>
     <string name="database_migration_activity__the_default_system_database_will_not_be_modified">The default system database will not be modified or altered in any way.</string>
@@ -1309,6 +1309,11 @@
     <string name="trimmer__deleting_old_messages">Deleting old messages...</string>
     <string name="trimmer__old_messages_successfully_deleted">Old messages successfully deleted</string>
 
+    <!-- Monitor_Log -->
+    <string name="time_stamp">Time stamp</string>
+    <string name="log_event">Log event</string>
+    <string name="extra_info">Extra infomation</string>
+
     <!-- transport_selection_list_item -->
     <string name="transport_selection_list_item__transport_icon">Transport icon</string>
     <string name="ConversationListFragment_loading">Loading...</string>
@@ -1403,6 +1408,9 @@
     <string name="prompt_passphrase_activity__tap_to_unlock">TAP TO UNLOCK</string>
     <string name="RegistrationLockDialog_reminder">Reminder:</string>
     <string name="recipient_preferences__about">About</string>
+
+    <string name="something">hello</string>
+    <string name="monitor">Monitor</string>
     <!-- EOF -->
 
 </resources>

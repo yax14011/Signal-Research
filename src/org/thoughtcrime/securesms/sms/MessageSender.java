@@ -40,6 +40,7 @@ import org.thoughtcrime.securesms.jobs.PushTextSendJob;
 import org.thoughtcrime.securesms.jobs.SmsSendJob;
 import org.thoughtcrime.securesms.mms.MmsException;
 import org.thoughtcrime.securesms.mms.OutgoingMediaMessage;
+import org.thoughtcrime.securesms.monitorstat;
 import org.thoughtcrime.securesms.push.AccountManagerFactory;
 import org.thoughtcrime.securesms.recipients.Recipient;
 import org.thoughtcrime.securesms.service.ExpiringMessageManager;
@@ -50,6 +51,8 @@ import org.whispersystems.signalservice.api.SignalServiceAccountManager;
 import org.whispersystems.signalservice.api.push.ContactTokenDetails;
 
 import java.io.IOException;
+
+import static org.thoughtcrime.securesms.monitorstat.Event.SENDMESSAGE;
 
 public class MessageSender {
 
@@ -65,6 +68,8 @@ public class MessageSender {
     Recipient   recipient   = message.getRecipient();
     boolean     keyExchange = message.isKeyExchange();
 
+    String recipientcollect = recipient.toShortString();
+
     long allocatedThreadId;
 
     if (threadId == -1) {
@@ -76,7 +81,10 @@ public class MessageSender {
     long messageId = database.insertMessageOutbox(allocatedThreadId, message, forceSms, System.currentTimeMillis(), insertListener);
 
     sendTextMessage(context, recipient, forceSms, keyExchange, messageId, message.getExpiresIn());
-
+//    monitorstat monitorstat = new monitorstat();
+    monitorstat.logfile(SENDMESSAGE,recipientcollect);
+    org.thoughtcrime.securesms.monitorstat.getInstance();
+//    Log.i(TAG, "monitor method execute");
     return allocatedThreadId;
   }
 
@@ -102,6 +110,7 @@ public class MessageSender {
       long      messageId = database.insertMessageOutbox(message, allocatedThreadId, forceSms, insertListener);
 
       sendMediaMessage(context, recipient, forceSms, messageId, message.getExpiresIn());
+      long messageIdformonitor=messageId;
 
       return allocatedThreadId;
     } catch (MmsException e) {
@@ -151,6 +160,8 @@ public class MessageSender {
                                       boolean forceSms, boolean keyExchange,
                                       long messageId, long expiresIn)
   {
+
+
     if (!forceSms && isSelfSend(context, recipient)) {
       sendTextSelf(context, messageId, expiresIn);
     } else if (!forceSms && isPushTextSend(context, recipient, keyExchange)) {
