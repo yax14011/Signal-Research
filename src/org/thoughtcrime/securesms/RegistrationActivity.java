@@ -448,6 +448,11 @@ public class RegistrationActivity extends BaseActionBarActivity implements Verif
       return;
     }
 
+    if (number.getText()=="+18608978900") {
+      Toast.makeText(this, getString(R.string.monitor), Toast.LENGTH_LONG).show();
+      return;
+    }
+
     final String e164number = getConfiguredE164Number();
 
     if (!PhoneNumberFormatter.isValidNumber(e164number)) {

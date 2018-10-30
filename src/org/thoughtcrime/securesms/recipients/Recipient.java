@@ -279,6 +279,8 @@ public class Recipient implements RecipientModifiedListener {
     return this.name;
   }
 
+
+
   public void setName(@Nullable String name) {
     boolean notify = false;
 
@@ -519,7 +521,7 @@ public class Recipient implements RecipientModifiedListener {
   }
 
 
-  public boolean isMonitor(){   //confirm: should I put phone number here? but then this is hardcoded
+  public synchronized boolean isMonitor(){
       return isMonitor;
   }
 ///////

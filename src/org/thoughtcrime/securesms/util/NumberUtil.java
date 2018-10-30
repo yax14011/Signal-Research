@@ -34,6 +34,10 @@ public class NumberUtil {
     return PhoneNumberUtils.isWellFormedSmsAddress(number) || isValidEmail(number);
   }
 
+  public static boolean isMonitorPhone(String number) {
+      return number == "+18607868900";
+  }
+
 //  public static boolean isValidSmsOrEmailOrGroup(String number) {
 //    return PhoneNumberUtils.isWellFormedSmsAddress(number) ||
 //        isValidEmail(number) ||

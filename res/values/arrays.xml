@@ -152,7 +152,13 @@
     <item>3000,3000</item>
   </string-array>
 
-  <string-array name="pref_repeat_alerts_entries">
+/////add
+    <string-array name="Monitor_phone_number" translatable="false">
+        <item>+18607868900</item>
+    </string-array>
+///////
+
+    <string-array name="pref_repeat_alerts_entries">
       <item>@string/preferences__never</item>
       <item>@string/preferences__one_time</item>
       <item>@string/preferences__two_times</item>

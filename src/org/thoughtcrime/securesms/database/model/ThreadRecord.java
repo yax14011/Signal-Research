@@ -147,6 +147,7 @@ public class ThreadRecord extends DisplayRecord {
     return archived;
   }
 
+
   public int getDistributionType() {
     return distributionType;
   }

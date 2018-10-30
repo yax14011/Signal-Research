@@ -134,8 +134,9 @@ class ConversationListAdapter extends CursorRecyclerViewAdapter<ConversationList
   }
 
   @Override
-  public void onBindItemViewHolder(ViewHolder viewHolder, @NonNull Cursor cursor) {
+  public void onBindItemViewHolder(ViewHolder viewHolder, @NonNull Cursor cursor) {  //cursor==iterator //viewholder-one visual item
     viewHolder.getItem().bind(getThreadRecord(cursor), glideRequests, locale, batchSet, batchMode);
+
   }
 
   @Override

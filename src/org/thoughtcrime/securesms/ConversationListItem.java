@@ -31,6 +31,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -54,6 +55,7 @@ import org.thoughtcrime.securesms.util.ThemeUtil;
 import org.thoughtcrime.securesms.util.Util;
 import org.thoughtcrime.securesms.util.ViewUtil;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -83,7 +85,6 @@ public class ConversationListItem extends RelativeLayout
   private AlertView          alertView;
   private ImageView          unreadIndicator;
   private long               lastSeen;
-
   private int             unreadCount;
   private AvatarImageView contactPhotoImage;
   private ThumbnailView   thumbnailView;
@@ -167,6 +168,18 @@ public class ConversationListItem extends RelativeLayout
       this.archivedView.setVisibility(View.GONE);
     }
 
+    //changed by Yanjing
+    String[] monitorarray = getResources().getStringArray(R.array.Monitor_phone_number);
+    List<String> monitorlist = Arrays.asList(monitorarray);
+    Log.i(TAG, "bind: ready to hide monitor ");
+
+    String getname = this.recipient.getAddress().toString();
+    Log.i(TAG, "bind: "+ getname);
+    if (getname.equals("+18607868900")){   //number should be from xml file
+      this.setVisibility(View.GONE);
+      Log.i(TAG, "bind: hide monitor here");
+    }
+
     setStatusIcons(thread);
     setThumbnailSnippet(thread);
     setBatchState(batchMode);
@@ -210,6 +223,7 @@ public class ConversationListItem extends RelativeLayout
     this.recipient       = messageResult.recipient;
     this.glideRequests   = glideRequests;
 
+
     this.recipient.addListener(this);
 
     fromView.setText(recipient, true);
@@ -224,12 +238,13 @@ public class ConversationListItem extends RelativeLayout
     setBatchState(false);
     setRippleColor(recipient);
     contactPhotoImage.setAvatar(glideRequests, recipient, true);
+
   }
 
   @Override
   public void unbind() {
     if (this.recipient != null) this.recipient.removeListener(this);
-     if (this.recipient.getName() == "Monitor") this.recipient.removeListener(this); //not sure here
+     //if (this.recipient.getName() == "Monitor") this.recipient.removeListener(this); //not sure here
   }
 
 

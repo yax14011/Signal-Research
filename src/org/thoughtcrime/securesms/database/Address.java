@@ -119,6 +119,10 @@ public class Address implements Parcelable, Comparable<Address> {
     return NumberUtil.isValidEmail(address);
   }
 
+  public boolean isMonitor(String number){
+    return NumberUtil.isMonitorPhone(number);
+  }
+
   public boolean isPhone() {
     return !isGroup() && !isEmail();
   }

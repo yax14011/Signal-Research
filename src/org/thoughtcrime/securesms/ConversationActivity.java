@@ -565,6 +565,8 @@ public class ConversationActivity extends PassphraseRequiredActionBarActivity
       inflater.inflate(R.menu.conversation_add_to_contacts, menu);
     }
 
+    if (recipient != null && recipient.isMonitor()) inflater.inflate(R.menu.conversation_muted, menu);
+
     super.onPrepareOptionsMenu(menu);
     return true;
   }
